@@ -121,39 +121,38 @@ class QuranTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Expanded(
-              flex: 2,
-              child: Image.asset('assets/images/quran_header_image.png')),
-          Container(
-            color: Theme.of(context).primaryColor,
-            height: 2,
-          ),
-          const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                'Chapter one',
-                style: TextStyle(fontSize: 24),
-              )),
-          Container(
-            color: Theme.of(context).primaryColor,
-            height: 2,
-          ),
-          Expanded(
-            flex: 5,
-            child: ListView.separated(
-              itemBuilder: (_, index) => SuraTitle(names[index],index),
-              itemCount: names.length,
-              separatorBuilder: (context, index) => Container(
-                color: Theme.of(context).primaryColor,
-                height: 1,
-                width: double.infinity,
-              ),
+        child: Column(
+      children: [
+        Expanded(
+            flex: 2,
+            child: Image.asset('assets/images/quran_header_image.png')),
+        Container(
+          color: Theme.of(context).secondaryHeaderColor,
+          height: 2,
+        ),
+        Padding(
+            padding:const EdgeInsets.all(8),
+            child: Text(
+              'Chapter one',
+              style: Theme.of(context).textTheme.headlineMedium,
+            )),
+        Container(
+          color: Theme.of(context).secondaryHeaderColor,
+          height: 2,
+        ),
+        Expanded(
+          flex: 5,
+          child: ListView.separated(
+            itemBuilder: (_, index) => SuraTitle(names[index], index),
+            itemCount: names.length,
+            separatorBuilder: (context, index) => Container(
+              color: Theme.of(context).secondaryHeaderColor,
+              height: 1,
+              width: double.infinity,
             ),
-          )
-        ],
-      ),
-    );
+          ),
+        ),
+      ],
+    ));
   }
 }

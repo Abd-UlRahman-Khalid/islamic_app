@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/model/sura_details_arguments.dart';
 import 'package:islami_app/widgets/vers_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:islami_app/providers/settings_provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = 'sura-details';
@@ -17,15 +19,15 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //convert from pts of type object to pointer of type SuraDetailsArg polymorphism
+    var settingProvider = Provider.of<SettingsProvider>(context);
     SuraDetailsArgs? arg =
         (ModalRoute.of(context)?.settings.arguments) as SuraDetailsArgs;
     if (verses.isEmpty) readFile(arg.index + 1);
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/images/main_background.png'),
+            image: AssetImage(settingProvider.getMainBackGroundImage()),
             fit: BoxFit.fill),
       ),
       child: Scaffold(
@@ -36,20 +38,19 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
         body: verses.isEmpty
             ? Center(child: CircularProgressIndicator())
             : Card(
-              margin: EdgeInsets.all(15),
-              color: Colors.white,
-              shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(30)
-              ),
-              child: ListView.separated(
-                  itemBuilder: (_, index) => VersWidget(verses[index],index+1),
+                margin: EdgeInsets.all(15),
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                child: ListView.separated(
+                  itemBuilder: (_, index) =>
+                      VersWidget(verses[index], index + 1),
                   itemCount: verses.length,
                   separatorBuilder: (context, index) => Container(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).secondaryHeaderColor,
                       height: 1,
                       width: double.infinity),
                 ),
-            ),
+              ),
       ),
     );
   }
