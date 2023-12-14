@@ -48,7 +48,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                   separatorBuilder: (context, index) => Container(
                       color: Theme.of(context).secondaryHeaderColor,
                       height: 1,
-                      width: double.infinity),
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 64),),
                 ),
               ),
       ),

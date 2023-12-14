@@ -29,6 +29,7 @@ class _HadethTabState extends State<HadethTab> {
                 color: Theme.of(context).secondaryHeaderColor,
                 height: 1,
                 width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 64),
               ),),)
         ],
       ),

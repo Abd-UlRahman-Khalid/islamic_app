@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/screens/settings/language_bottom_sheet.dart';
 import 'package:islami_app/screens/settings/theme_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:islami_app/providers/settings_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsTab extends StatefulWidget {
   @override
@@ -16,8 +18,10 @@ class _SettingsTabState extends State<SettingsTab> {
       padding: const EdgeInsets.all(25),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Text(
-          'Theme',
-          style: Theme.of(context).textTheme.titleSmall,
+          AppLocalizations.of(context)!.theme,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontSize: 20
+          ),
         ),
         SizedBox(
           height: 8,
@@ -43,23 +47,31 @@ class _SettingsTabState extends State<SettingsTab> {
           height: 18,
         ),
         Text(
-          'Language',
-          style: Theme.of(context).textTheme.titleSmall,
+          AppLocalizations.of(context)!.language,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontSize: 20
+          ),
         ),
         SizedBox(
           height: 8,
         ),
-        Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(
-                  color: Theme.of(context).secondaryHeaderColor, width: 1),
-            ),
-            child: Text(
-              'English',
-              style: Theme.of(context).textTheme.headlineLarge,
-            ))
+        InkWell(
+          onTap: (){
+            showLanguageBottomSheet();
+          },
+          child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(
+                    color: Theme.of(context).secondaryHeaderColor, width: 1),
+              ),
+              child: Text(
+                settingsProvider.isEn()?
+                'English':'العربية',
+                style: Theme.of(context).textTheme.headlineLarge,
+              )),
+        )
       ]),
     );
   }
@@ -69,6 +81,13 @@ class _SettingsTabState extends State<SettingsTab> {
         context: context,
         builder: (BuildContext) {
           return ThemeBottomSheet();
+        });
+  }
+  void showLanguageBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext) {
+          return LanguageBottomSheet();
         });
   }
 }

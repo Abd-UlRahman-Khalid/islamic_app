@@ -47,11 +47,7 @@ class _SabhaTabState extends State<SabhaTab> {
                 top: 58,
                 left: MediaQuery.of(context).size.width * 0.2,
                 child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      angle--;
-                    });
-                  },
+                  onTap: onClick,
                   child: Transform.rotate(
                     angle: angle,
                     child: settingProvider.isDark()
